@@ -150,7 +150,7 @@ describe Chef::Provider::Deploy do
       @provider.should_receive(:symlink)
       FileUtils.should_receive(:rm_rf).with("/my/deploy/dir/releases/4")
       FileUtils.should_receive(:rm_rf).with("/my/deploy/dir/releases/5")
-      @provider.action_rollback
+      @provider.run_action(:rollback)
       @provider.release_path.should eql("/my/deploy/dir/releases/3")
     end
 
@@ -161,7 +161,7 @@ describe Chef::Provider::Deploy do
       Dir.stub!(:glob).with("/my/deploy/dir/releases/*").and_return(all_releases)
       @provider.should_receive(:symlink)
       FileUtils.should_receive(:rm_rf).with("/my/deploy/dir/releases/20040815162342")
-      @provider.action_rollback
+      @provider.run_action(:rollback)
       @provider.release_path.should eql("/my/deploy/dir/releases/20040700000000")
     end
 
@@ -174,7 +174,7 @@ describe Chef::Provider::Deploy do
       Dir.stub!(:glob).with("/my/deploy/dir/releases/*").and_return(all_releases)
       @provider.should_receive(:symlink)
       FileUtils.should_receive(:rm_rf).with("/my/deploy/dir/releases/20040815162342")
-      @provider.action_rollback
+      @provider.run_action(:rollback)
       @provider.release_path.should eql("/my/deploy/dir/releases/20040700000000")
     end
   end
@@ -189,7 +189,7 @@ describe Chef::Provider::Deploy do
       Dir.stub!(:glob).with("/my/deploy/dir/releases/*").and_return(all_releases)
       @provider.should_receive(:symlink)
       FileUtils.should_receive(:rm_rf).with("/my/deploy/dir/releases/20040815162342")
-      @provider.action_rollback
+      @provider.run_action(:rollback)
       @provider.release_path.should eql("/my/deploy/dir/releases/20040700000000")
     end
   end
